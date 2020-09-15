@@ -19,6 +19,11 @@ namespace BridgeFront.Controllers
             this.annuaire = annuaire;
         }
 
+        public string Index()
+        {            
+            return "Annuaire";
+        }
+
         [HttpGet]
         [Route("GetEntreprise")]
         public IEnumerable<Entreprise> GetEntreprise()
