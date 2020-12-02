@@ -20,7 +20,7 @@
     "Bridges.API": {
       "commandName": "Project",
       "launchBrowser": true,
-      "launchUrl": "api/values",
+      "launchUrl": "api/entreprise",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
