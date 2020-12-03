@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using BridgeCore.Entreprise;
 using Bridges.Services;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 
@@ -15,18 +16,19 @@ namespace BridgeFront.Controllers
     {
         readonly IAnnuaire annuaire;
         private ILogger logger;
+        private IConfiguration _configuration;
 
-        public EntrepriseController(IAnnuaire annuaire, ILoggerFactory loggerFactory)
+        public EntrepriseController(IAnnuaire annuaire, ILoggerFactory loggerFactory, IConfiguration iconfig)
         {
             this.annuaire = annuaire;
             this.logger = loggerFactory.CreateLogger<EntrepriseController>();
+            _configuration = iconfig;
         }
 
         public string Index()
-        {
-            System.Diagnostics.Trace.TraceError("Trace Générer avec Diagnostics Trace");
-
+        {            
             logger.LogInformation("log information from logger");
+            logger.LogWarning( _configuration["BridgesConfigAppTest"]);
 
             return "Annuaire";
         }
