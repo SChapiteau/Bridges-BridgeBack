@@ -14,6 +14,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Bridges.Infrastructure\Bridges.Infra.DAL_SQL\Bridges.Infra.DAL_SQL.csproj" />
+    <ProjectReference Include="..\Bridges.Infrastructure\Bridges.Infra.DAL_Static\Bridges.Infra.DAL_Static.csproj" />
     <ProjectReference Include="..\Bridges.Services\Bridges.Services.csproj" />
   </ItemGroup>
 

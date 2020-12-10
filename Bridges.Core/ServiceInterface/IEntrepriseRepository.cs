@@ -1,9 +1,9 @@
-﻿using BridgeCore.Entreprise;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using BridgeCore.Models;
 
-namespace Bridges.Services
+namespace BridgeCore.ServiceInterface
 {
     public interface IEntrepriseRepository
     {

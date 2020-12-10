@@ -1,4 +1,5 @@
-﻿using BridgeCore.Entreprise;
+﻿using BridgeCore.Models;
+using BridgeCore.ServiceInterface;
 using System.Collections.Generic;
 
 namespace Bridges.Services
@@ -13,7 +14,6 @@ namespace Bridges.Services
         }
         public IEnumerable<Entreprise> GetAll()
         {
-
             return enterpriseRepository.GetAll();
 
         }

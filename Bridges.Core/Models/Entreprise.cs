@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace BridgeCore.Entreprise
+namespace BridgeCore.Models
 {
     public class Entreprise
     {

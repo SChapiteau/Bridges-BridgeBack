@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using BridgeCore.ServiceInterface;
 using Bridges.Infra.DAL_SQL;
+using Bridges.Infra.DAL_Static;
 using Bridges.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -29,9 +31,10 @@ namespace Bridges.API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
-            services.AddScoped<IAnnuaire, Annuaire>();
 
-            services.AddScoped<IEntrepriseRepository, EntrepriseSQLRepository>();
+            services.AddScoped<IAnnuaire, Annuaire>();
+            //services.AddScoped<IEntrepriseRepository, EntrepriseSQLRepository>();
+            services.AddScoped<IEntrepriseRepository, EntrepriseStaticRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

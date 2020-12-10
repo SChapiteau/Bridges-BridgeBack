@@ -1,16 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using BridgeCore.Entreprise;
-using Bridges.Services;
+﻿using BridgeCore.Models;
+using BridgeCore.ServiceInterface;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
-using Newtonsoft.Json;
+using System.Collections.Generic;
 
 namespace BridgeFront.Controllers
-{   
+{
     [Route("api/[controller]")]
     public class EntrepriseController : Controller
     {
@@ -36,9 +32,7 @@ namespace BridgeFront.Controllers
         [HttpGet]
         [Route("GetEntreprise")]
         public IEnumerable<Entreprise> GetEntreprise()
-        {
-            //Faire appel a une API
-            //Annuaire annuaire = new Annuaire(new EntrepriseSQLRepository()); // faire l'injection de depéndance
+        {            
             return this.annuaire.GetAll();
         }
     }
