@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
-using BridgeCore.ServiceInterface;
+using Bridges.Core.ServiceInterface;
 using Bridges.Infra.DAL_SQL;
 using Bridges.Infra.DAL_Static;
 using Bridges.Services;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -15,6 +17,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using Microsoft.IdentityModel.Tokens;
 
 namespace Bridges.API
 {
@@ -32,7 +35,28 @@ namespace Bridges.API
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
+            var key = Encoding.ASCII.GetBytes(Configuration["Secret"]);
+            services.AddAuthentication(x =>
+            {
+                x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
+            .AddJwtBearer(x =>
+            {
+                x.RequireHttpsMetadata = false;
+                x.SaveToken = true;
+                x.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(key),
+                    ValidateIssuer = false,
+                    ValidateAudience = false
+                };
+            });
+
             services.AddScoped<IAnnuaire, Annuaire>();
+            services.AddScoped<ILoginService, LoginService>();
+
             //services.AddScoped<IEntrepriseRepository, EntrepriseSQLRepository>();
             services.AddScoped<IEntrepriseRepository, EntrepriseStaticRepository>();
         }
@@ -52,6 +76,8 @@ namespace Bridges.API
 
             var path = Directory.GetCurrentDirectory();
             loggerFactory.AddFile($"{path}\\Logs\\Log.txt");
+
+            app.UseAuthentication();
 
             app.UseHttpsRedirection();
             app.UseMvc();

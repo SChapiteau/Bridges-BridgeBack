@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using BridgeCore.Models;
 
-namespace BridgeCore.ServiceInterface
+namespace Bridges.Core.ServiceInterface
 {
     public interface IAnnuaire
     {

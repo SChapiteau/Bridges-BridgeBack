@@ -1,6 +1,6 @@
 ﻿
 using BridgeCore.Models;
-using BridgeCore.ServiceInterface;
+using Bridges.Core.ServiceInterface;
 using Bridges.Services;
 using Dapper;
 using Microsoft.Extensions.Configuration;
