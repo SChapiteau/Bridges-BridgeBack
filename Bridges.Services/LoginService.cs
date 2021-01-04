@@ -37,6 +37,16 @@ namespace Bridges.Services
             if (user == null)
                 return null;
 
+            user.Token = CreateToken(user);
+
+            // remove password before returning
+            user.Password = null;
+
+            return user;
+        }
+
+        private string CreateToken(User user)
+        {
             // authentication successful so generate jwt token
             var tokenHandler = new JwtSecurityTokenHandler();
             var key = Encoding.ASCII.GetBytes(_configuration["secret"]);
@@ -44,18 +54,15 @@ namespace Bridges.Services
             {
                 Subject = new ClaimsIdentity(new Claim[]
                 {
-                    new Claim(ClaimTypes.Name, user.Id.ToString())
+                    new Claim(ClaimTypes.Name, user.Id.ToString()),
+                    new Claim(ClaimTypes.Role, "user"),
+                    new Claim("CustomClaim", "custom string"),
                 }),
                 Expires = DateTime.UtcNow.AddDays(7),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
             };
             var token = tokenHandler.CreateToken(tokenDescriptor);
-            user.Token = tokenHandler.WriteToken(token);
-
-            // remove password before returning
-            user.Password = null;
-
-            return user;
+            return tokenHandler.WriteToken(token);
         }
     }
 }
