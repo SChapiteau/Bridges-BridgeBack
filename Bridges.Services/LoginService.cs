@@ -18,8 +18,8 @@ namespace Bridges.Services
         //Pour test
         private List<User> _users = new List<User>
         {
-            new User { Id = 1, FirstName = "Test", LastName = "User", Username = "test", Password = "test" },
-            new User { Id = 2, FirstName = "Test2", LastName = "User2", Username = "test2", Password = "test2" }
+            new User { Id = 1, Prenom = "Test", Nom = "User", Pseudo = "test", Password = "test" },
+            new User { Id = 2, Prenom = "Test2", Nom = "User2", Pseudo = "test2", Password = "test2" }
         };
 
         public LoginService(IConfiguration configuration)
@@ -31,7 +31,7 @@ namespace Bridges.Services
         public User Authenticate(string username, string password)
         {
             //refaire la méthde de verficiation de password
-            var user = _users.SingleOrDefault(x => x.Username == username && x.Password == password);
+            var user = _users.SingleOrDefault(x => x.Pseudo == username && x.Password == password);
 
             // return null if user not found
             if (user == null)

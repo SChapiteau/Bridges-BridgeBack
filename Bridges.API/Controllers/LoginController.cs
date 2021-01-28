@@ -26,10 +26,12 @@ namespace Bridges.API.Controllers
         [HttpPost("authenticate")]
         public IActionResult Authenticate([FromBody]User userParam) //Changer le parametre user
         {
-            var user = loginService.Authenticate(userParam.Username, userParam.Password);
+            var user = loginService.Authenticate(userParam.Pseudo, userParam.Password);
 
             if (user == null)
-                return BadRequest(new { message = "Username or password is incorrect" });
+            {                
+                return Unauthorized();             
+            }
 
             return Ok(user);
         }
@@ -40,7 +42,7 @@ namespace Bridges.API.Controllers
         public IActionResult GetAll()
         {
             //var users = _userService.GetAll();
-            var user = new User { Id = 0, FirstName = "get", Username = "getall" };
+            var user = new User { Id = 0, Prenom = "get", Pseudo = "getall" };
             return Ok(user);
         }
     }
