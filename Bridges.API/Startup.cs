@@ -57,8 +57,8 @@ namespace Bridges.API
             services.AddScoped<IAnnuaire, Annuaire>();
             services.AddScoped<ILoginService, LoginService>();
 
-            //services.AddScoped<IEntrepriseRepository, EntrepriseSQLRepository>();
-            services.AddScoped<IEntrepriseRepository, EntrepriseStaticRepository>();
+            services.AddScoped<IEntrepriseRepository, EntrepriseSQLRepository>();
+            //services.AddScoped<IEntrepriseRepository, EntrepriseStaticRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

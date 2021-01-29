@@ -19,8 +19,10 @@ namespace Bridges.Infra.DAL_SQL
         }
 
         public IEnumerable<Entreprise> GetAll()
-        {
-            return CurrentConnection.Query<Entreprise>("Select * From Entreprise").ToList();            
+        {            
+            string procedure = "EntrepriseGetAll";
+            return CurrentConnection.Query<Entreprise>(procedure);
         }
     }
 }
+
