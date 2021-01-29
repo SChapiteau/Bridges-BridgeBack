@@ -24,7 +24,7 @@ namespace Bridges.API.Controllers
 
         [AllowAnonymous]
         [HttpPost("authenticate")]
-        public IActionResult Authenticate([FromBody]User userParam) //Changer le parametre user
+        public IActionResult Authenticate([FromBody]UtilisateurLoginDTO userParam) //Changer le parametre user
         {
             var user = loginService.Authenticate(userParam.Pseudo, userParam.Password);
 
@@ -36,14 +36,22 @@ namespace Bridges.API.Controllers
             return Ok(user);
         }
 
+        //A bouger
+
         //a bouger dans un user controlleur
         [HttpGet]
         [Route("GetAll")]
         public IActionResult GetAll()
-        {
-            //var users = _userService.GetAll();
-            var user = new User { Id = 0, Prenom = "get", Pseudo = "getall" };
+        {            
+            var user = new Utilisateur { Id = Guid.NewGuid(), Prenom = "get", Pseudo = "getall" };
             return Ok(user);
         }
+    }
+
+    public class UtilisateurLoginDTO
+    {
+        public string Pseudo { get; set; }
+
+        public string Password { get; set; }
     }
 }
