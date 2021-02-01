@@ -1,5 +1,5 @@
 ﻿using BridgeCore.Models;
-using BridgeCore.ServiceInterface;
+using Bridges.Core.ServiceInterface;
 using System.Collections.Generic;
 
 namespace Bridges.Services

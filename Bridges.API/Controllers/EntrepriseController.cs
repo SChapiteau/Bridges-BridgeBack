@@ -1,5 +1,5 @@
 ﻿using BridgeCore.Models;
-using BridgeCore.ServiceInterface;
+using Bridges.Core.ServiceInterface;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
@@ -7,6 +7,7 @@ using System.Collections.Generic;
 
 namespace BridgeFront.Controllers
 {
+    [ApiController]
     [Route("api/[controller]")]
     public class EntrepriseController : Controller
     {

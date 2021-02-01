@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using BridgeCore.Models;
 
-namespace BridgeCore.ServiceInterface
+namespace Bridges.Core.ServiceInterface
 {
     public interface IEntrepriseRepository
     {
