@@ -1,4 +1,5 @@
-using BridgeCore.Entreprise;
+using BridgeCore.Models;
+using Bridges.Core.ServiceInterface;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using System.Collections.Generic;
@@ -7,10 +8,10 @@ using System.Linq;
 namespace Bridges.Services.test
 {
     [TestClass]
-    public class UnitTest1
+    public class AnnuaireTest
     {
         [TestMethod]
-        public void GetAllTest()
+        public void Return_AllEntreprise_When_GetAll()
         {
             Mock<IEntrepriseRepository> entrepriseRepoMock = new Mock<IEntrepriseRepository>();
             entrepriseRepoMock.Setup(er => er.GetAll())

@@ -5,7 +5,7 @@ using BCrypt.Net;
     
 namespace Bridges.Services
 {
-    public class PasswordHahsingHelper //Class a tester
+    public class PasswordHahsingHelper
     {
         private static string GetRandomSalt()
         {
