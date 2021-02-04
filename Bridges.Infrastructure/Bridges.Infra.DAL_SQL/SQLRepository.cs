@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.Configuration;
+using NHibernate;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
@@ -15,8 +16,10 @@ namespace Bridges.Infra.DAL_SQL
             _configuration = iconfig;
         }
 
-        private static SqlConnection _currentConnection;
-        
+        //
+
+        //Pour Dapper => a supprimé ?
+        private static SqlConnection _currentConnection;        
         public SqlConnection CurrentConnection
         {
             get {
@@ -28,5 +31,21 @@ namespace Bridges.Infra.DAL_SQL
                 return _currentConnection;
             }
         }
+
+
+        private static ISession _currentSession;
+        public ISession CurrentSession
+        {
+            get
+            {
+                if(_currentSession == null)
+                {
+                    var connectionString = _configuration["ConnectionString"];
+                    _currentSession = FluentNHibernateHelper.OpenSession(connectionString);
+                }
+                return _currentSession;
+            }
+        }
+
     }
 }

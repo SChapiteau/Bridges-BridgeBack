@@ -5,8 +5,9 @@ using System.Text;
 
 namespace Bridges.Core.ServiceInterface
 {
-    public interface ILoginService
+    public interface IUSerService
     {
-        User Authenticate(string username, string password);
+        bool AddUser(User user);
+        IEnumerable<User> GetAllUser();
     }
 }

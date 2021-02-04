@@ -43,7 +43,7 @@ namespace Bridges.API.Controllers
         [Route("GetAll")]
         public IActionResult GetAll()
         {            
-            var user = new Utilisateur { Id = Guid.NewGuid(), Prenom = "get", Pseudo = "getall" };
+            var user = new User { Id = Guid.NewGuid(), Firstname = "get", Login = "getall" };
             return Ok(user);
         }
     }

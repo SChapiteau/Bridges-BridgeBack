@@ -5,16 +5,16 @@ using System.Text;
 
 namespace Bridges.Core.ServiceInterface
 {
-    public interface IUtilisateurRepository
+    public interface IUserRepository
     {
-        IEnumerable<Utilisateur> GetAll();
+        IEnumerable<User> GetAll();
 
-        Utilisateur GetByPseudo(string pseudo);
+        User GetByPseudo(string pseudo);
 
-        void AjoutUtilisateur(Utilisateur utilisateur);
+        void AddUser(User utilisateur);
 
-        void ModifierUtilisateur(Utilisateur utilisateur);
+        void ModifierUtilisateur(User utilisateur);
 
-        void SupprimerUtilisateur(Guid utilisateurId);
+        void SupprimerUtilisateur(Guid utilisateurId);        
     }
 }

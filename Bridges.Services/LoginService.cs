@@ -13,14 +13,7 @@ namespace Bridges.Services
 {
     public class LoginService : ILoginService
     {
-        private IConfiguration _configuration;
-
-        //Pour test
-        private List<Utilisateur> _users = new List<Utilisateur>
-        {
-            new Utilisateur { Id = Guid.NewGuid(), Prenom = "Test", Nom = "User", Pseudo = "test"},
-            new Utilisateur { Id = Guid.NewGuid(), Prenom = "Test2", Nom = "User2", Pseudo = "test2"}
-        };
+        private IConfiguration _configuration;        
 
         public LoginService(IConfiguration configuration)
         {
@@ -28,10 +21,10 @@ namespace Bridges.Services
         }
                     
 
-        public Utilisateur Authenticate(string username, string password)
+        public User Authenticate(string username, string password)
         {
             //refaire la méthde de verficiation de password
-            var user = _users.SingleOrDefault(x => x.Pseudo == username);//&& x.Password == password);
+            var user = new User() { Id = Guid.NewGuid(), Name = "test" }    ; // toujours autentifier
 
             // return null if user not found
             if (user == null)
@@ -42,7 +35,7 @@ namespace Bridges.Services
             return user;
         }
 
-        private string CreateToken(Utilisateur user)
+        private string CreateToken(User user)
         {
             // authentication successful so generate jwt token
             var tokenHandler = new JwtSecurityTokenHandler();

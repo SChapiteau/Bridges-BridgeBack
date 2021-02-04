@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Bridges.Core.ServiceInterface;
 using Bridges.Infra.DAL_SQL;
+using Bridges.Infra.DAL_SQL.Utilisateurs;
 using Bridges.Infra.DAL_Static;
 using Bridges.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -56,8 +57,10 @@ namespace Bridges.API
 
             services.AddScoped<IAnnuaire, Annuaire>();
             services.AddScoped<ILoginService, LoginService>();
+            services.AddScoped<IUSerService, UserService>();
 
             services.AddScoped<IEntrepriseRepository, EntrepriseSQLRepository>();
+            services.AddScoped<IUserRepository, UserSQLRepository>();
             //services.AddScoped<IEntrepriseRepository, EntrepriseStaticRepository>();
         }
 
