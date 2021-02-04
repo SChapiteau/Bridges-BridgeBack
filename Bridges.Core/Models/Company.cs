@@ -6,8 +6,9 @@ namespace BridgeCore.Models
 {
     public class Company
     {
-        public string SIRET { get; set; }
+        public virtual Guid Id { get; set; }
+        public virtual string SIRET { get; set; }
 
-        public string Name { get; set; }
+        public virtual string Name { get; set; }
     }
 }

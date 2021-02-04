@@ -19,7 +19,8 @@ namespace Bridges.Infra.DAL_SQL
                                                      .Database(MsSqlConfiguration.MsSql2012.ConnectionString(connectionString).ShowSql())
 
                 .Mappings(m =>m.FluentMappings
-                                .AddFromAssemblyOf<UserMap>())
+                                .AddFromAssemblyOf<UserMap>()
+                                .AddFromAssemblyOf<CompanyMap>())
 
                 .ExposeConfiguration(cfg => new SchemaExport(cfg)
                 .Create(false, false))
