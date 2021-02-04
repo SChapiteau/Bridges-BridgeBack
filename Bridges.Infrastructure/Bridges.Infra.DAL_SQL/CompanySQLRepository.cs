@@ -12,16 +12,15 @@ using System.Runtime;
 
 namespace Bridges.Infra.DAL_SQL
 {
-    public class EntrepriseSQLRepository : SQLRepository, IEntrepriseRepository
+    public class CompanySQLRepository : SQLRepository, ICompanyRepository
     {
-        public EntrepriseSQLRepository(IConfiguration iconfig) : base(iconfig)
+        public CompanySQLRepository(IConfiguration iconfig) : base(iconfig)
         {
         }
 
-        public IEnumerable<Entreprise> GetAll()
-        {            
-            string procedure = "EntrepriseGetAll";
-            return CurrentConnection.Query<Entreprise>(procedure);
+        public IEnumerable<Company> GetAll()
+        {                        
+            return this.CurrentSession.Query<Company>();
         }
     }
 }

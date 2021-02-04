@@ -3,8 +3,8 @@ using BridgeCore.Models;
 
 namespace Bridges.Core.ServiceInterface
 {
-    public interface IAnnuaire
+    public interface ICompanyService
     {
-        IEnumerable<Entreprise> GetAll();
+        IEnumerable<Company> GetAll();
     }
 }

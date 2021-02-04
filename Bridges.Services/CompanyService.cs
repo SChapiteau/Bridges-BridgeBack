@@ -4,15 +4,15 @@ using System.Collections.Generic;
 
 namespace Bridges.Services
 {
-    public class Annuaire : IAnnuaire
+    public class CompanyService : ICompanyService
     {
-        private readonly IEntrepriseRepository enterpriseRepository;
+        private readonly ICompanyRepository enterpriseRepository;
 
-        public Annuaire(IEntrepriseRepository enterpriseRepository)
+        public CompanyService(ICompanyRepository enterpriseRepository)
         {
             this.enterpriseRepository = enterpriseRepository;
         }
-        public IEnumerable<Entreprise> GetAll()
+        public IEnumerable<Company> GetAll()
         {
             return enterpriseRepository.GetAll();
 

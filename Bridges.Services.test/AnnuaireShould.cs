@@ -13,17 +13,17 @@ namespace Bridges.Services.test
         [TestMethod]
         public void Return_AllEntreprise_When_GetAll()
         {
-            Mock<IEntrepriseRepository> entrepriseRepoMock = new Mock<IEntrepriseRepository>();
+            Mock<ICompanyRepository> entrepriseRepoMock = new Mock<ICompanyRepository>();
             entrepriseRepoMock.Setup(er => er.GetAll())
-                .Returns(new List<Entreprise>
+                .Returns(new List<Company>
             {
-                new Entreprise{SIRET = "123", Nom="Entreprise 1"},
-                new Entreprise{SIRET = "222", Nom="Entreprise 2"},
-                new Entreprise{SIRET = "333", Nom="Entreprise 3"}
+                new Company{SIRET = "123", Name="Entreprise 1"},
+                new Company{SIRET = "222", Name="Entreprise 2"},
+                new Company{SIRET = "333", Name="Entreprise 3"}
             }
             );
 
-            Annuaire sut = new Annuaire(entrepriseRepoMock.Object);
+            CompanyService sut = new CompanyService(entrepriseRepoMock.Object);
             var listeEntreprise = sut.GetAll();
 
             Assert.AreEqual(3, listeEntreprise.Count());

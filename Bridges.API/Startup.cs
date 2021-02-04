@@ -55,11 +55,11 @@ namespace Bridges.API
                 };
             });
 
-            services.AddScoped<IAnnuaire, Annuaire>();
+            services.AddScoped<ICompanyService, CompanyService>();
             services.AddScoped<ILoginService, LoginService>();
             services.AddScoped<IUSerService, UserService>();
 
-            services.AddScoped<IEntrepriseRepository, EntrepriseSQLRepository>();
+            services.AddScoped<ICompanyRepository, CompanySQLRepository>();
             services.AddScoped<IUserRepository, UserSQLRepository>();
             //services.AddScoped<IEntrepriseRepository, EntrepriseStaticRepository>();
         }

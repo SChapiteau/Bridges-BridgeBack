@@ -5,8 +5,8 @@ using BridgeCore.Models;
 
 namespace Bridges.Core.ServiceInterface
 {
-    public interface IEntrepriseRepository
+    public interface ICompanyRepository
     {
-        IEnumerable<Entreprise> GetAll();
+        IEnumerable<Company> GetAll();
     }
 }

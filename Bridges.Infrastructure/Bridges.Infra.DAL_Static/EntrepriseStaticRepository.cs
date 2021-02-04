@@ -5,29 +5,29 @@ using System.Collections.Generic;
 
 namespace Bridges.Infra.DAL_Static
 {
-    public class EntrepriseStaticRepository : IEntrepriseRepository
+    public class EntrepriseStaticRepository : ICompanyRepository
     {
-        public IEnumerable<Entreprise> GetAll()
+        public IEnumerable<Company> GetAll()
         {
-            return new List<Entreprise> {
-                new Entreprise{Nom = "Entreprise Static 1", SIRET ="11111"},
-                new Entreprise{Nom = "Entreprise Static 2", SIRET ="22222"},
-                new Entreprise{Nom = "Entreprise Static 3", SIRET ="33333"},
-                new Entreprise{Nom = "Entreprise Static 4", SIRET ="44444"},
-                new Entreprise{Nom = "Entreprise Static 5", SIRET ="55555"},
-                new Entreprise{Nom = "Entreprise Static 6", SIRET ="66666"},
-                new Entreprise{Nom = "Entreprise Static 7", SIRET ="77777"},
-                new Entreprise{Nom = "Entreprise Static 8", SIRET ="8888"},
-                new Entreprise{Nom = "Entreprise Static 9", SIRET ="99999"},
-                new Entreprise{Nom = "Entreprise Static 10", SIRET ="aaaaa"},
-                new Entreprise{Nom = "Entreprise Static 11", SIRET ="bbbbb"},
-                new Entreprise{Nom = "Entreprise Static 12", SIRET ="ccccc"},
-                new Entreprise{Nom = "Entreprise Static 12", SIRET ="ddddd"},
-                new Entreprise{Nom = "Entreprise Static 14", SIRET ="eeeee"},
-                new Entreprise{Nom = "Entreprise Static 15", SIRET ="fffff"},
-                new Entreprise{Nom = "Entreprise Static 16", SIRET ="ggggg"},
-                new Entreprise{Nom = "Entreprise Static 17", SIRET ="hhhhh"},
-                new Entreprise{Nom = "Entreprise Static 18", SIRET ="iiiii"},
+            return new List<Company> {
+                new Company{Name = "Entreprise Static 1", SIRET ="11111"},
+                new Company{Name = "Entreprise Static 2", SIRET ="22222"},
+                new Company{Name = "Entreprise Static 3", SIRET ="33333"},
+                new Company{Name = "Entreprise Static 4", SIRET ="44444"},
+                new Company{Name = "Entreprise Static 5", SIRET ="55555"},
+                new Company{Name = "Entreprise Static 6", SIRET ="66666"},
+                new Company{Name = "Entreprise Static 7", SIRET ="77777"},
+                new Company{Name = "Entreprise Static 8", SIRET ="8888"},
+                new Company{Name = "Entreprise Static 9", SIRET ="99999"},
+                new Company{Name = "Entreprise Static 10", SIRET ="aaaaa"},
+                new Company{Name = "Entreprise Static 11", SIRET ="bbbbb"},
+                new Company{Name = "Entreprise Static 12", SIRET ="ccccc"},
+                new Company{Name = "Entreprise Static 12", SIRET ="ddddd"},
+                new Company{Name = "Entreprise Static 14", SIRET ="eeeee"},
+                new Company{Name = "Entreprise Static 15", SIRET ="fffff"},
+                new Company{Name = "Entreprise Static 16", SIRET ="ggggg"},
+                new Company{Name = "Entreprise Static 17", SIRET ="hhhhh"},
+                new Company{Name = "Entreprise Static 18", SIRET ="iiiii"},
             };
         }
     }

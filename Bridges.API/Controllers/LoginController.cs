@@ -6,6 +6,7 @@ using Bridges.Core.Models;
 using Bridges.Core.ServiceInterface;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 
 namespace Bridges.API.Controllers
 {
@@ -14,10 +15,12 @@ namespace Bridges.API.Controllers
     [Route("api/[controller]")]
     public class LoginController : Controller
     {
+        private readonly ILogger logger;
         private readonly ILoginService loginService;
 
-        public LoginController(ILoginService loginService)
-        {
+        public LoginController(ILoggerFactory loggerFactory, ILoginService loginService)
+        {            
+            this.logger = loggerFactory.CreateLogger<LoginController>();
             this.loginService = loginService;
         }
 
