@@ -27,6 +27,7 @@ namespace Bridges.Services
 
                 user.Password = PasswordHahsingHelper.HashPassword(user.Password);
                 user.IsActive = true;
+                user.Role = UserRole.Consumer;
                 _userRepository.AddUser(user);
                  
             }            

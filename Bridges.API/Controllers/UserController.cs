@@ -33,7 +33,7 @@ namespace Bridges.API.Controllers
                 _userService.AddUser(utilisateur);
                 return Ok();
             }
-            catch(UserServiceException ex)
+            catch(UserServiceException)
             {
                 return BadRequest();
             }

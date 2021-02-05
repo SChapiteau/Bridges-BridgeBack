@@ -17,7 +17,7 @@ namespace Bridges.Infra.DAL_SQL.Utilisateurs
             Map(x => x.Firstname);
             Map(x => x.Login);
             Map(x => x.Password);
-            Map(x => x.Role).CustomType(typeof(RoleUtilisateur));
+            Map(x => x.Role).CustomType(typeof(UserRole));
             Map(x => x.IsActive);            
 
             //Table("User");

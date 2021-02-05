@@ -24,11 +24,10 @@ namespace Bridges.Services
                     
 
         public string Authenticate(string login, string password)
-        {
-            
+        {            
             User user = _userRepository.GetByLogin(login);
 
-            if(user != null && isCredentialValid(user, password))
+            if(user != null && user.IsActive && isCredentialValid(user, password))
             {
                 return CreateToken(user);                
             }
