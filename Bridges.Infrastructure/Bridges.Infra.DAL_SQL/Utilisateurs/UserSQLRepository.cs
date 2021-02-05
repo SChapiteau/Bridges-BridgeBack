@@ -32,7 +32,7 @@ namespace Bridges.Infra.DAL_SQL.Utilisateurs
 
         public User GetByLogin(string login)
         {
-            return this.CurrentSession.Query<User>().First(u => u.Login == login);
+            return this.CurrentSession.Query<User>()?.FirstOrDefault(u => u.Login == login);
         }
 
         public void UpdateUser(User utilisateur)

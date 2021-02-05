@@ -9,7 +9,7 @@ using Bridges.Core.ServiceInterface;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 
-namespace Bridges.Services
+namespace Bridges.Services.Login
 {
     public class LoginService : ILoginService
     {
@@ -24,7 +24,9 @@ namespace Bridges.Services
                     
 
         public string Authenticate(string login, string password)
-        {            
+        {
+            if (string.IsNullOrWhiteSpace(login) || string.IsNullOrWhiteSpace(password)) return null; //throw new LoginServiceException("Login ou passworn non valide");
+
             User user = _userRepository.GetByLogin(login);
 
             if(user != null && user.IsActive && isCredentialValid(user, password))

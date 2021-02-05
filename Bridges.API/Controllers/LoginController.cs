@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Bridges.Core.Models;
 using Bridges.Core.ServiceInterface;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
@@ -15,12 +16,12 @@ namespace Bridges.API.Controllers
     [Route("api/[controller]")]
     public class LoginController : Controller
     {
-        private readonly ILogger logger;
+        private readonly ILogger _logger;
         private readonly ILoginService loginService;
 
         public LoginController(ILoggerFactory loggerFactory, ILoginService loginService)
         {            
-            this.logger = loggerFactory.CreateLogger<LoginController>();
+            _logger = loggerFactory.CreateLogger<LoginController>();
             this.loginService = loginService;
         }
 
@@ -29,14 +30,21 @@ namespace Bridges.API.Controllers
         [HttpPost("authenticate")]
         public IActionResult Authenticate([FromBody]UtilisateurLoginDTO userParam) //Changer le parametre user
         {
-            var token = loginService.Authenticate(userParam.Login, userParam.Password);
+            try
+            {
+                var token = loginService.Authenticate(userParam.Login, userParam.Password);
 
-            if (token == null)
-            {                
-                return Unauthorized();             
+                if (token == null)return Unauthorized();
+                
+                return Ok(token);
+
             }
-
-            return Ok(token);
+            catch(Exception ex)
+            {
+                _logger.LogError("LoginController.Authenticate", ex);
+                return StatusCode(StatusCodes.Status500InternalServerError);
+            }
+            
         }
 
         //A bouger
