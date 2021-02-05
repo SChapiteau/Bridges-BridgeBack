@@ -9,12 +9,12 @@ namespace Bridges.Core.ServiceInterface
     {
         IEnumerable<User> GetAll();
 
-        User GetByPseudo(string pseudo);
+        User GetByLogin(string pseudo);
 
         void AddUser(User utilisateur);
 
-        void ModifierUtilisateur(User utilisateur);
+        void UpdateUser(User utilisateur);
 
-        void SupprimerUtilisateur(Guid utilisateurId);        
+        void DeleteUtilisateur(Guid utilisateurId);        
     }
 }

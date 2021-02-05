@@ -13,26 +13,37 @@ namespace Bridges.Services
 {
     public class LoginService : ILoginService
     {
-        private IConfiguration _configuration;        
+        private IConfiguration _configuration;
+        private readonly IUserRepository _userRepository;
 
-        public LoginService(IConfiguration configuration)
+        public LoginService(IConfiguration configuration, IUserRepository userRepository)
         {
             _configuration = configuration;
+            _userRepository = userRepository;
         }
                     
 
-        public User Authenticate(string username, string password)
+        public User Authenticate(string login, string password)
         {
-            //refaire la méthde de verficiation de password
-            var user = new User() { Id = Guid.NewGuid(), Name = "test" }    ; // toujours autentifier
+            
+            User user = _userRepository.GetByLogin(login);
 
-            // return null if user not found
-            if (user == null)
+            if(user != null && isCredentialValid(user, password))
+            {
+                user.Token = CreateToken(user);
+
+                //TO DO : retournere un Authenticate Result avec le token.
+                return user;
+            }
+            else
                 return null;
 
-            user.Token = CreateToken(user);
             
-            return user;
+        }
+
+        private bool isCredentialValid(User user, string password)
+        {
+            return PasswordHahsingHelper.ValidatePassword(password, user.Password);
         }
 
         private string CreateToken(User user)
@@ -44,9 +55,9 @@ namespace Bridges.Services
             {
                 Subject = new ClaimsIdentity(new Claim[]
                 {
-                    new Claim(ClaimTypes.Name, user.Id.ToString()),
-                    new Claim(ClaimTypes.Role, "user"),
-                    new Claim("CustomClaim", "custom string"),
+                    new Claim(ClaimTypes.Sid, user.Id.ToString()),
+                    new Claim(ClaimTypes.Name, user.Name),
+                    new Claim(ClaimTypes.Role, ((int)user.Role).ToString()),                    
                 }),
                 Expires = DateTime.UtcNow.AddDays(7),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)

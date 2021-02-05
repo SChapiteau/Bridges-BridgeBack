@@ -30,17 +30,17 @@ namespace Bridges.Infra.DAL_SQL.Utilisateurs
             return this.CurrentSession.Query<User>().ToList();
         }
 
-        public User GetByPseudo(string pseudo)
+        public User GetByLogin(string login)
+        {
+            return this.CurrentSession.Query<User>().First(u => u.Login == login);
+        }
+
+        public void UpdateUser(User utilisateur)
         {
             throw new NotImplementedException();
         }
 
-        public void ModifierUtilisateur(User utilisateur)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void SupprimerUtilisateur(Guid utilisateurId)
+        public void DeleteUtilisateur(Guid utilisateurId)
         {
             throw new NotImplementedException();
         }

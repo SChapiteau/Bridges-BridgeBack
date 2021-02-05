@@ -29,7 +29,7 @@ namespace Bridges.API.Controllers
         [HttpPost("authenticate")]
         public IActionResult Authenticate([FromBody]UtilisateurLoginDTO userParam) //Changer le parametre user
         {
-            var user = loginService.Authenticate(userParam.Pseudo, userParam.Password);
+            var user = loginService.Authenticate(userParam.Login, userParam.Password);
 
             if (user == null)
             {                
@@ -53,7 +53,7 @@ namespace Bridges.API.Controllers
 
     public class UtilisateurLoginDTO
     {
-        public string Pseudo { get; set; }
+        public string Login { get; set; }
 
         public string Password { get; set; }
     }

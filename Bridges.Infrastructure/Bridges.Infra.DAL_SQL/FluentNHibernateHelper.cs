@@ -14,10 +14,10 @@ namespace Bridges.Infra.DAL_SQL
     {
         public static ISession OpenSession(string connectionString)
         {
-            
-            ISessionFactory sessionFactory = Fluently.Configure()
-                                                     .Database(MsSqlConfiguration.MsSql2012.ConnectionString(connectionString).ShowSql())
+            //UpdateDatabase(connectionString);
 
+            ISessionFactory sessionFactory = Fluently.Configure()
+                .Database(MsSqlConfiguration.MsSql2012.ConnectionString(connectionString).ShowSql())
                 .Mappings(m =>m.FluentMappings
                                 .AddFromAssemblyOf<UserMap>()
                                 .AddFromAssemblyOf<CompanyMap>())
@@ -28,6 +28,23 @@ namespace Bridges.Infra.DAL_SQL
 
             return sessionFactory.OpenSession();
 
+        }
+
+        private static void UpdateDatabase(string connectionString)
+        {
+            var configuration = Fluently.Configure()
+                .Database(MsSqlConfiguration.MsSql2012.ConnectionString(connectionString).ShowSql)
+                .Mappings(m => m.FluentMappings
+                                .AddFromAssemblyOf<UserMap>()
+                                .AddFromAssemblyOf<CompanyMap>())
+                .BuildConfiguration();
+
+            //var exporter = new SchemaExport(configuration);
+            var updater = new SchemaUpdate(configuration);
+            //Console.WriteLine(exporter.t)
+            updater.Execute(true, true);
+
+            
         }
     }
 }

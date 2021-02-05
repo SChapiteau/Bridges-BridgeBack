@@ -11,7 +11,7 @@ namespace Bridges.Core.Models
         public virtual string Name { get; set; }
         public virtual string Login { get; set; }
         public virtual RoleUtilisateur Role { get; set; }
-        //public string Password { get; set; }
+        public virtual string Password { get; set; }
         public virtual string Token { get; set; } //Notion a supprimer ( uniquement pour le front )
         public virtual bool IsActive { get; set; }
     }

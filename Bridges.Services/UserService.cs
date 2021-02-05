@@ -20,6 +20,7 @@ namespace Bridges.Services
         {
             try
             {
+                user.Password = PasswordHahsingHelper.HashPassword(user.Password);
                 _userRepository.AddUser(user);
 
                 return true;
