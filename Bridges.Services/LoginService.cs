@@ -52,8 +52,10 @@ namespace Bridges.Services
             {
                 Subject = new ClaimsIdentity(new Claim[]
                 {
-                    new Claim(ClaimTypes.Sid, user.Id.ToString()),
+                    
+                    new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
                     new Claim(ClaimTypes.Name, user.Name),
+                    //new Claim(ClaimTypes.Email, user.Name),
                     new Claim(ClaimTypes.Role, ((int)user.Role).ToString()),                    
                 }),
                 Expires = DateTime.UtcNow.AddDays(7),

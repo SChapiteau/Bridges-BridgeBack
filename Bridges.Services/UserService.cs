@@ -1,5 +1,6 @@
 ﻿using Bridges.Core.Models;
 using Bridges.Core.ServiceInterface;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -8,26 +9,35 @@ namespace Bridges.Services
 {
     public class UserService : IUSerService
     {
+        private ILogger<UserService> _logger;
         private readonly IUserRepository _userRepository;
 
-        public UserService(IUserRepository userRepository)
+        public UserService(ILoggerFactory loggerFactory, IUserRepository userRepository)
         {
+            _logger = loggerFactory.CreateLogger<UserService>();
             _userRepository = userRepository;
         }
 
 
-        public bool AddUser(User user)
+        public void AddUser(User user)
         {
             try
             {
-                user.Password = PasswordHahsingHelper.HashPassword(user.Password);
-                _userRepository.AddUser(user);
+                if (_userRepository.GetByLogin(user.Login) == null) throw new UserServiceInValidLoginException("Login déja utilisé");                
 
-                return true;
+                user.Password = PasswordHahsingHelper.HashPassword(user.Password);
+                user.IsActive = true;
+                _userRepository.AddUser(user);
+                 
+            }            
+            catch(UserServiceException e)
+            {
+                throw e;
             }
             catch( Exception ex)
             {
-                throw ex;
+                _logger.LogError("Erreur dans UserService.AddUser", ex);
+                throw new BridgesServiceException("Erreur dans UserService.AddUser");
             }
         }
 
@@ -36,4 +46,5 @@ namespace Bridges.Services
             return _userRepository.GetAll();
         }
     }
+
 }

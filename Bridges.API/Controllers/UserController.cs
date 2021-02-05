@@ -4,6 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Bridges.Core.Models;
 using Bridges.Core.ServiceInterface;
+using Bridges.Services;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
@@ -24,9 +26,21 @@ namespace Bridges.API.Controllers
 
         [HttpPost]
         [Route("AddUser")]
-        public void AddUser(User utilisateur)
+        public IActionResult AddUser(User utilisateur)
         {
-            _userService.AddUser(utilisateur);
+            try
+            {
+                _userService.AddUser(utilisateur);
+                return Ok();
+            }
+            catch(UserServiceException ex)
+            {
+                return BadRequest();
+            }
+            catch(Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError);
+            }
         }
 
         [HttpGet]

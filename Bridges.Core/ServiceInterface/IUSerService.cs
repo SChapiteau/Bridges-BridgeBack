@@ -7,7 +7,7 @@ namespace Bridges.Core.ServiceInterface
 {
     public interface IUSerService
     {
-        bool AddUser(User user);
+        void AddUser(User user);
         IEnumerable<User> GetAllUser();
     }
 }
