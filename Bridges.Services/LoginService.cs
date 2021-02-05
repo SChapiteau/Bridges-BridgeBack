@@ -23,17 +23,14 @@ namespace Bridges.Services
         }
                     
 
-        public User Authenticate(string login, string password)
+        public string Authenticate(string login, string password)
         {
             
             User user = _userRepository.GetByLogin(login);
 
             if(user != null && isCredentialValid(user, password))
             {
-                user.Token = CreateToken(user);
-
-                //TO DO : retournere un Authenticate Result avec le token.
-                return user;
+                return CreateToken(user);                
             }
             else
                 return null;

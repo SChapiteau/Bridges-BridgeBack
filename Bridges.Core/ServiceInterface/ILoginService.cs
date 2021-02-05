@@ -7,6 +7,6 @@ namespace Bridges.Core.ServiceInterface
 {
     public interface ILoginService
     {
-        User Authenticate(string username, string password);
+        string Authenticate(string username, string password);
     }
 }

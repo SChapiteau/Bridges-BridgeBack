@@ -29,14 +29,14 @@ namespace Bridges.API.Controllers
         [HttpPost("authenticate")]
         public IActionResult Authenticate([FromBody]UtilisateurLoginDTO userParam) //Changer le parametre user
         {
-            var user = loginService.Authenticate(userParam.Login, userParam.Password);
+            var token = loginService.Authenticate(userParam.Login, userParam.Password);
 
-            if (user == null)
+            if (token == null)
             {                
                 return Unauthorized();             
             }
 
-            return Ok(user);
+            return Ok(token);
         }
 
         //A bouger
