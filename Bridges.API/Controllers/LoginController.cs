@@ -1,12 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
+using BridgeFront;
 using Bridges.Core.Models;
 using Bridges.Core.ServiceInterface;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 
 namespace Bridges.API.Controllers
@@ -17,11 +20,13 @@ namespace Bridges.API.Controllers
     public class LoginController : Controller
     {
         private readonly ILogger _logger;
+        private readonly IConfiguration _configuration;
         private readonly ILoginService loginService;
 
-        public LoginController(ILoggerFactory loggerFactory, ILoginService loginService)
+        public LoginController(ILoggerFactory loggerFactory, IConfiguration configuration, ILoginService loginService)
         {            
             _logger = loggerFactory.CreateLogger<LoginController>();
+            _configuration = configuration;
             this.loginService = loginService;
         }
 
@@ -32,10 +37,14 @@ namespace Bridges.API.Controllers
         {
             try
             {
-                var token = loginService.Authenticate(userParam.Login, userParam.Password);
+                var user = loginService.Authenticate(userParam.Login, userParam.Password);
+                if (user == null)return Unauthorized();
 
-                if (token == null)return Unauthorized();
-                
+                // modifier l'appel
+                var tokenManager = new TokenManager();
+                var key = Encoding.ASCII.GetBytes(_configuration["secret"]);
+                var token = tokenManager.CreateToken(user, key);
+
                 return Ok(token);
 
             }
@@ -45,18 +54,7 @@ namespace Bridges.API.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError);
             }
             
-        }
-
-        //A bouger
-
-        //a bouger dans un user controlleur
-        [HttpGet]
-        [Route("GetAll")]
-        public IActionResult GetAll()
-        {            
-            var user = new User { Id = Guid.NewGuid(), Firstname = "get", Login = "getall" };
-            return Ok(user);
-        }
+        }        
     }
 
     public class UtilisateurLoginDTO

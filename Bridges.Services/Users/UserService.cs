@@ -5,7 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Bridges.Services
+namespace Bridges.Services.Users
 {
     public class UserService : IUSerService
     {
@@ -23,7 +23,9 @@ namespace Bridges.Services
         {
             try
             {
-                if (_userRepository.GetByLogin(user.Login) == null) throw new UserServiceInValidLoginException("Login déja utilisé");                
+                if (!user.isValid()) throw new UserServiceInValidUserException("donnée utilisateur manquante");
+                if (_userRepository.GetByLogin(user.Login) != null) throw new UserServiceLoginAlreadyUseException("Login déja utilisé");
+                
 
                 user.Password = PasswordHahsingHelper.HashPassword(user.Password);
                 user.IsActive = true;
@@ -46,6 +48,8 @@ namespace Bridges.Services
         {
             return _userRepository.GetAll();
         }
+        
+                
     }
 
 }

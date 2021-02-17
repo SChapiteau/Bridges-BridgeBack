@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using BCrypt.Net;
     
-namespace Bridges.Services
+namespace Bridges.Services.Users
 {
     public class PasswordHahsingHelper
     {

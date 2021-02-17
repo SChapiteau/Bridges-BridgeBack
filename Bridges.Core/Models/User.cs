@@ -14,6 +14,14 @@ namespace Bridges.Core.Models
         public virtual string Password { get; set; }
         public virtual string Token { get; set; } //Notion a supprimer ( uniquement pour le front )
         public virtual bool IsActive { get; set; }
+
+        public virtual bool isValid()
+        {
+            if (string.IsNullOrWhiteSpace(Login)) return false;
+            if (string.IsNullOrWhiteSpace(Password)) return false;
+
+            return true;
+        }
     }
 
     public enum UserRole

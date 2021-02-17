@@ -10,6 +10,7 @@ using Bridges.Infra.DAL_SQL.Utilisateurs;
 using Bridges.Infra.DAL_Static;
 using Bridges.Services;
 using Bridges.Services.Login;
+using Bridges.Services.Users;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
