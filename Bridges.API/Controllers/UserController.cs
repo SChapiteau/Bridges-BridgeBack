@@ -82,6 +82,32 @@ namespace Bridges.API.Controllers
             }
         }
 
+        [HttpPost]
+        [Route("DeleteUser")]
+        public IActionResult DeleteUser(User utilisateur)
+        {
+            var userRole = GetUserRole();
+
+            try
+            {
+                if (userRole == UserRole.ADMIN)
+                {
+                    _userService.DeleteUser(utilisateur);
+                    return Ok();
+                }
+                else
+                    return Unauthorized();
+            }
+            catch (UserServiceException)
+            {
+                return BadRequest();
+            }
+            catch (Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError);
+            }
+        }
+
         [HttpGet]
         [Route("GetAllUser")]
         public IActionResult GetAllUser()

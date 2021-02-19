@@ -10,5 +10,7 @@ namespace Bridges.Core.ServiceInterface
         void AddUser(User user);
         IEnumerable<User> GetAllUser();
         void UpdateUser(User user);
+
+        void DeleteUser(User user);
     }
 }

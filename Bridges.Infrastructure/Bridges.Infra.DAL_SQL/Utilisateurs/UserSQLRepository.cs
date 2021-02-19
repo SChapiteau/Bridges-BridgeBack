@@ -44,9 +44,13 @@ namespace Bridges.Infra.DAL_SQL.Utilisateurs
             return this.CurrentSession.Query<User>()?.FirstOrDefault(u => u.Login == login);
         }        
 
-        public void DeleteUtilisateur(Guid utilisateurId)
+        public void DeleteUser(User user)
         {
-            throw new NotImplementedException();
+            using (var transaction = CurrentSession.BeginTransaction())
+            {
+                this.CurrentSession.Delete(user);
+                transaction.Commit();
+            }
         }
 
         public User GetById(Guid id)

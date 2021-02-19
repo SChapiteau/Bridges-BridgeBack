@@ -11,11 +11,12 @@ namespace Bridges.Core.ServiceInterface
 
         User GetByLogin(string pseudo);
 
-        void AddUser(User utilisateur);
+        void AddUser(User user);
 
-        void UpdateUser(User utilisateur);
+        void UpdateUser(User user);
 
-        void DeleteUtilisateur(Guid utilisateurId);
+        void DeleteUser(User user);
+
         User GetById(Guid id);
     }
 }

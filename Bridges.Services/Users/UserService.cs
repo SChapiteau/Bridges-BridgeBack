@@ -74,9 +74,26 @@ namespace Bridges.Services.Users
             }
         }
 
+        public void DeleteUser(User user)
+        {
+            try
+            {
+                var userToDelete = _userRepository.GetById(user.Id);
 
-
-
+                if (userToDelete == null) throw new UserServiceInValidUserException("Id utilisateur non trouvé");
+                
+                _userRepository.DeleteUser(userToDelete);
+            }
+            catch (UserServiceException e)
+            {
+                throw e;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError("Erreur dans UserService.AddUser", ex);
+                throw new BridgesServiceException("Erreur dans UserService.AddUser");
+            }
+        }
     }
 
 }
