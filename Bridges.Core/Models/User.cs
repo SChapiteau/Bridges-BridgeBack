@@ -9,10 +9,10 @@ namespace Bridges.Core.Models
         public virtual Guid Id { get; set; }
         public virtual string Firstname { get; set; }
         public virtual string Name { get; set; }
-        public virtual string Login { get; set; }
+        public virtual string Login { get; set; } // A remplacer par le email
         public virtual UserRole Role { get; set; }
         public virtual string Password { get; set; }
-        public virtual string Token { get; set; } //Notion a supprimer ( uniquement pour le front )
+        //public virtual string Token { get; set; } //Notion a supprimer ( uniquement pour le front )
         public virtual bool IsActive { get; set; }
 
         public virtual bool isValid()

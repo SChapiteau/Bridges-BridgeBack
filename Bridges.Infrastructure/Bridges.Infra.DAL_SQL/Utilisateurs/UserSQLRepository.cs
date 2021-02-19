@@ -22,8 +22,17 @@ namespace Bridges.Infra.DAL_SQL.Utilisateurs
                 this.CurrentSession.Save(user);
                 transaction.Commit();
             }
-        }    
-    
+        }
+
+        public void UpdateUser(User user)
+        {
+            using (var transaction = CurrentSession.BeginTransaction())
+            {
+                this.CurrentSession.Update(user);
+                transaction.Commit();
+            }
+        }
+
 
         public IEnumerable<User> GetAll()
         {
@@ -33,16 +42,16 @@ namespace Bridges.Infra.DAL_SQL.Utilisateurs
         public User GetByLogin(string login)
         {
             return this.CurrentSession.Query<User>()?.FirstOrDefault(u => u.Login == login);
-        }
-
-        public void UpdateUser(User utilisateur)
-        {
-            throw new NotImplementedException();
-        }
+        }        
 
         public void DeleteUtilisateur(Guid utilisateurId)
         {
             throw new NotImplementedException();
+        }
+
+        public User GetById(Guid id)
+        {
+            return this.CurrentSession.Query<User>()?.FirstOrDefault(u => u.Id == id);
         }
     }
 }

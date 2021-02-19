@@ -19,7 +19,7 @@ namespace Bridges.API.Controllers
     [Authorize]
     [ApiController]
     [Route("api/[controller]")]
-    public class UserController : Controller
+    public class UserController : BaseController
     {
         private readonly IUSerService _userService;
         private readonly ILogger logger;
@@ -33,12 +33,8 @@ namespace Bridges.API.Controllers
         [HttpPost]        
         [Route("AddUser")]
         public IActionResult AddUser(User utilisateur)
-        {
-            var accessToken = Request.Headers["Authorization"].ToString().Replace("Bearer ", ""); ;
-            
-            //Refecto la gestion du role
-            var tokenManager = new TokenManager();            
-            var userRole = tokenManager.GetClaim<UserRole>(accessToken, ClaimNames.ROLE);
+        {            
+            var userRole = GetUserRole();
 
             try
             {
@@ -60,21 +56,54 @@ namespace Bridges.API.Controllers
             }
         }
 
+        [HttpPost]
+        [Route("UpdateUser")]
+        public IActionResult UpdateUser(User utilisateur)
+        {
+            var userRole = GetUserRole();
+
+            try
+            {
+                if (userRole == UserRole.ADMIN)
+                {
+                    _userService.UpdateUser(utilisateur);
+                    return Ok();
+                }
+                else
+                    return Unauthorized();
+            }
+            catch (UserServiceException)
+            {
+                return BadRequest();
+            }
+            catch (Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError);
+            }
+        }
+
         [HttpGet]
         [Route("GetAllUser")]
-        public IEnumerable<User> GetAllUser()
-        {
-            return _userService.GetAllUser();
-        }
-
-        //A déplacer :
-        public string GetClaim(string token, string claimType)
-        {
-            var tokenHandler = new JwtSecurityTokenHandler();
-            var securityToken = tokenHandler.ReadToken(token) as JwtSecurityToken;
-
-            var stringClaimValue = securityToken.Claims.First(claim => claim.Type ==  claimType).Value;
-            return stringClaimValue;
-        }
+        public IActionResult GetAllUser()
+        {            
+            var userRole = GetUserRole();
+            try
+            {
+                if (userRole == UserRole.ADMIN)
+                {
+                    return Ok(_userService.GetAllUser());                    
+                }
+                else
+                    return Unauthorized();
+            }
+            catch (UserServiceException)
+            {
+                return BadRequest();
+            }
+            catch (Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError);
+            }
+        }        
     }
 }

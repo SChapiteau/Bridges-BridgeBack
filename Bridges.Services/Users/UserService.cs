@@ -18,14 +18,17 @@ namespace Bridges.Services.Users
             _userRepository = userRepository;
         }
 
+        public IEnumerable<User> GetAllUser()
+        {
+            return _userRepository.GetAll();
+        }
 
         public void AddUser(User user)
         {
             try
             {
                 if (!user.isValid()) throw new UserServiceInValidUserException("donnée utilisateur manquante");
-                if (_userRepository.GetByLogin(user.Login) != null) throw new UserServiceLoginAlreadyUseException("Login déja utilisé");
-                
+                if (_userRepository.GetByLogin(user.Login) != null) throw new UserServiceLoginAlreadyUseException("Login déja utilisé");                
 
                 user.Password = PasswordHahsingHelper.HashPassword(user.Password);
                 user.IsActive = true;
@@ -44,12 +47,36 @@ namespace Bridges.Services.Users
             }
         }
 
-        public IEnumerable<User> GetAllUser()
+        public void UpdateUser(User user)
         {
-            return _userRepository.GetAll();
+            try
+            {
+                var userToUpdate = _userRepository.GetById(user.Id);
+
+                if (userToUpdate == null) throw new UserServiceInValidUserException("Id utilisateur non trouvé");
+
+                userToUpdate.Name = user.Name;
+                userToUpdate.Firstname = user.Firstname;
+                userToUpdate.Role = user.Role;
+                userToUpdate.IsActive = user.IsActive;
+                userToUpdate.Login = user.Login;
+
+                _userRepository.UpdateUser(userToUpdate);
+            }
+            catch (UserServiceException e)
+            {
+                throw e;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError("Erreur dans UserService.AddUser", ex);
+                throw new BridgesServiceException("Erreur dans UserService.AddUser");
+            }
         }
-        
-                
+
+
+
+
     }
 
 }
