@@ -24,8 +24,8 @@ namespace Bridges.Core.Models.OfferModels
         public virtual bool IsValid() // A remplacer par un validateur
         {
             return !string.IsNullOrEmpty(Title)
-                && !string.IsNullOrEmpty(Description);
-                //&& Owner != null;
+                && !string.IsNullOrEmpty(Description)
+                && Owner != null;
         }
     }
 

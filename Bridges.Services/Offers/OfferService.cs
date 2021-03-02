@@ -17,6 +17,7 @@ namespace Bridges.Services.Offers
 
         public void CreateOffer(Core.Models.OfferModels.Offer offer)
         {
+            offer.CreationDate = DateTime.Now; // Utilisé un DateTime Provider
             _offerRepository.CreateOffer(offer);
         }
 

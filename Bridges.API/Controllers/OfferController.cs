@@ -32,22 +32,14 @@ namespace Bridges.API.Controllers
         public IActionResult CreateOffer(Offer offer)
         {
             try
-            {
-                var offerTest = new Offer()
-                {
-                    Title = "offreTest 1",
-                    CreationDate = DateTime.Now,
-                    Description = "Offre créer En Back pour test",                    
-                };
-
+            {                
                 var userid = GetUserId();
-                offerTest.Owner = _userService.GetUserById(userid);
-
-                if (offerTest.IsValid())
-                {
-                    
-                    _offerService.CreateOffer(offerTest);
-                    return OK();
+                offer.Owner = _userService.GetUserById(userid);
+                
+                if (offer.IsValid())
+                {                    
+                    _offerService.CreateOffer(offer);
+                    return Ok();
                 }
                 return BadRequest();
 
@@ -58,11 +50,6 @@ namespace Bridges.API.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError);
             }
             
-        }
-
-        private IActionResult OK()
-        {
-            throw new NotImplementedException();
-        }
+        }        
     }
 }
