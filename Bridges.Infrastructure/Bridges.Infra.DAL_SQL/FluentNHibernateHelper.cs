@@ -1,5 +1,6 @@
 ﻿using Bridges.Core.Models;
-using Bridges.Infra.DAL_SQL.Utilisateurs;
+using Bridges.Infra.DAL_SQL.OfferDAL;
+using Bridges.Infra.DAL_SQL.UserDAL;
 using FluentNHibernate.Cfg;
 using FluentNHibernate.Cfg.Db;
 using NHibernate;
@@ -20,6 +21,7 @@ namespace Bridges.Infra.DAL_SQL
                 .Database(MsSqlConfiguration.MsSql2012.ConnectionString(connectionString).ShowSql())
                 .Mappings(m =>m.FluentMappings
                                 .AddFromAssemblyOf<UserMap>()
+                                .AddFromAssemblyOf<OfferMap>()
                                 .AddFromAssemblyOf<CompanyMap>())
 
                 .ExposeConfiguration(cfg => new SchemaExport(cfg)

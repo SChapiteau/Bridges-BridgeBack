@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Bridges.Infra.DAL_SQL.Utilisateurs
+namespace Bridges.Infra.DAL_SQL.UserDAL
 {
     public class UserMap : ClassMap<User>
     {
@@ -18,7 +18,12 @@ namespace Bridges.Infra.DAL_SQL.Utilisateurs
             Map(x => x.Login);
             Map(x => x.Password);
             Map(x => x.Role).CustomType(typeof(UserRole));
-            Map(x => x.IsActive);            
+            Map(x => x.IsActive);
+            //HasMany(x => x.Offers)
+            //    .KeyColumn("UserId")
+            //    .Inverse()
+            //    .Cascade.None();
+
 
             //Table("User");
         }

@@ -12,5 +12,7 @@ namespace Bridges.Core.ServiceInterface
         void UpdateUser(User user);
 
         void DeleteUser(User user);
+
+        User GetUserById(Guid guid);
     }
 }

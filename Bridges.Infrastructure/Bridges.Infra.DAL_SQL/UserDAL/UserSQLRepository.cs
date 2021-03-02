@@ -7,7 +7,7 @@ using System.Text;
 using Microsoft.Extensions.Configuration;
 using System.Linq;
 
-namespace Bridges.Infra.DAL_SQL.Utilisateurs
+namespace Bridges.Infra.DAL_SQL.UserDAL
 {
     public class UserSQLRepository : SQLRepository, IUserRepository
     {

@@ -12,6 +12,7 @@ namespace Bridges.Services
         {
             this.enterpriseRepository = enterpriseRepository;
         }
+
         public IEnumerable<Company> GetAll()
         {
             return enterpriseRepository.GetAll();

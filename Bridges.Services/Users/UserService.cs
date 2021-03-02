@@ -94,6 +94,11 @@ namespace Bridges.Services.Users
                 throw new BridgesServiceException("Erreur dans UserService.AddUser");
             }
         }
+
+        public User GetUserById(Guid guid)
+        {
+            return _userRepository.GetById(guid);
+        }
     }
 
 }

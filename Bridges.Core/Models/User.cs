@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Bridges.Core.Models.OfferModels;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -11,11 +12,12 @@ namespace Bridges.Core.Models
         public virtual string Name { get; set; }
         public virtual string Login { get; set; } // A remplacer par le email
         public virtual UserRole Role { get; set; }
-        public virtual string Password { get; set; }
-        //public virtual string Token { get; set; } //Notion a supprimer ( uniquement pour le front )
+        public virtual string Password { get; set; }        
         public virtual bool IsActive { get; set; }
 
-        public virtual bool isValid()
+        //public virtual IList<Offer> Offers { get; set; }
+
+        public virtual bool isValid() // For Create
         {
             if (string.IsNullOrWhiteSpace(Login)) return false;
             if (string.IsNullOrWhiteSpace(Password)) return false;
